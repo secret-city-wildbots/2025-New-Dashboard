@@ -1,0 +1,31 @@
+Components:
+    >On/Off switch
+    >Button
+    >Armable Button
+    >Readout
+    >NT Readout
+    >Angle Display (this one was just a break from the hard stuff)
+    >Simple Subsystem
+    >Swerve Module
+    >Boolean Readout
+    >NT Boolean Readout
+    -Error Modals
+    -Master States
+    -Input (basically just the readout styles)
+    -Dropdown
+    -Field Map
+    -Camera Feed
+    -Master Alarm
+    -Master Alarm Global Display
+    -Master Alarms
+    -Slider
+    -Driver Profiles Editor/Selector
+    -Variables Page
+    -Driver/Manip Help
+    -Checklist
+
+    -Motor Testing
+    -Setpoint Editor
+
+    -3d Field Map?
+    -3d simulator?

@@ -1,0 +1,221 @@
+@import url('./fonts/Kanit.css');
+
+body {
+    background-color: #202022;
+    font-family: Kanit;
+}
+
+* {
+    color: #eed;
+}
+
+.row > * {
+    padding: 0;
+}
+
+.column-item {
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically (optional) */
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.column {
+    padding: 0.5rem;
+    position: relative;
+}
+
+.column:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(116, 255, 6, 0.8),
+        rgba(116, 255, 6, 0.4),
+        rgba(116, 255, 6, 0.8)
+    );
+}
+
+.row {
+    width: 100%;
+}
+
+.row.bubble {
+    border-color: rgba(116, 255, 6, 0.8);
+}
+
+.tab-selector {
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border: none;
+    border-bottom: none !important;
+    background: none;
+}
+
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid rgba(68, 142, 205, 0.8);
+}
+
+.bubble {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 1, 152, 0.8);
+}
+
+label {
+    font-weight:500;
+    font-size: 1.5rem;
+}
+
+label.label-small {
+    font-size: 1.2rem;
+    padding-right: 0.75rem;
+}
+
+/*
+after this is all styles for specific components. I may break all
+this into seperate files that compile into this one at some point,
+but it works for now.
+*/
+
+/* container */
+
+.container-fluid {
+    width: 100%;
+}
+
+/* switch */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 62px;
+    height: 33px;
+    border-radius: 16.5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.switch.vertical {
+    width: 33px;
+    height: 62px;
+}
+
+.switch.disabled,
+.switch:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.switch .knob {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: all 0.25s ease, border 0s, outline 0s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #202022;
+    border: none;
+}
+
+.switch.on:not(.vertical) .knob {
+    left: 31px;
+}
+
+.switch.on.vertical .knob {
+    top: 2px;
+}
+
+.switch.off.vertical .knob {
+    top: 31px;
+}
+
+.switch:not(.disabled):hover {
+    outline: 1px solid rgba(255, 1, 152, 1);
+}
+
+.switch:not(.disabled):hover:not(:active) .knob {
+    border: 1px solid rgb(255, 1, 152);
+    outline: 1px solid rgb(255, 1, 152);
+}
+
+/* button */
+
+.button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: box-shadow 0.1s;
+    outline: 0;
+}
+
+.button:hover:not(.disabled):not(:active) {
+    outline: 2px solid rgb(255, 1, 152);
+}
+
+.button:active:not(.disabled) {
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
+
+.button.disabled,
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* readout */
+
+.readout {
+    font-family: monospace;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgb(68, 142, 205);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    overflow: hidden;
+}
+
+/* boolean readout */
+
+.boolean-readout {
+    --chamfer: 0.75rem;
+
+    clip-path: polygon(  /* add a chamfer (it looks very sexy) */
+        var(--chamfer) 0%,  /* top-left cut */
+        calc(100% - var(--chamfer)) 0%,  /* top-right cut */
+        100% var(--chamfer),
+        100% calc(100% - var(--chamfer)), /* bottom-right cut */
+        calc(100% - var(--chamfer)) 100%,
+        var(--chamfer) 100%,
+        0% calc(100% - var(--chamfer)),
+        0% var(--chamfer)
+    );
+
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    padding: 0.4rem 0.75rem;
+}
+
+/* Swerve Module */
+
+.swerve-modules > table > tr > td {
+    padding-top: 1rem;
+}
