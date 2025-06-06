@@ -12,13 +12,10 @@ import SimpleSubsystem from "../components/SimpleSubsystem.tsx";
 import SwerveModules from "../components/SwerveModules.tsx";
 import BooleanReadout from "../components/BooleanReadout.tsx";
 import NTBooleanReadout from "../components/NTBooleanReadout.tsx";
+import MasterStates from "../components/MasterStates.tsx";
 
 export default function () {
     const socket = io();
-
-    socket.on("Swerve_0_Details", (vari: number[]) => {
-        console.log(vari);
-    });
 
     const tabs = [
         {
@@ -126,16 +123,7 @@ export default function () {
                         />
                     </DashboardItem>
                     <DashboardItem noBubble>
-                        <NTBooleanReadout
-                            text="SIGMA"
-                            socket={socket}
-                            nt="Sigma_Active0"
-                        />
-                        <NTBooleanReadout
-                            text="SIGMA"
-                            socket={socket}
-                            nt="Sigma_Active1"
-                        />
+                        <MasterStates socket={socket} masterStates={["STOW","FEED","SCOR","CLMB"]}/>
                     </DashboardItem>
                 </div>
             </div>

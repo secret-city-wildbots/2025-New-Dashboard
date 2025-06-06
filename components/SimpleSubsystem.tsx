@@ -42,11 +42,6 @@ const SimpleSubsystem = ({
         socket.emit("Calibrate_" + name, false);
     };
 
-    console.log(name +
-                                (velocity
-                                    ? "_Velocity_(" + unit + ")"
-                                    : "_Position_(" + unit + ")"));
-
     return (
         <div
             class={"bubble " + (dashboardItem ? "column-item" : "")}

@@ -37,7 +37,6 @@ const NTReadout = ({
           newVal = newVal[index];
         }
         if (precision !== undefined) {
-            console.log(nt, precision);
           if (precision == 0) {
             newVal = Math.floor(newVal);
           } else {

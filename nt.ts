@@ -2,6 +2,7 @@ import {
     NetworkTables,
     NetworkTablesTypeInfos,
     NetworkTablesTopic,
+    NetworkTablesTypeInfo,
 } from "npm:ntcore-ts-client";
 import { Socket } from "npm:socket.io";
 import chalk from "npm:chalk";
@@ -78,13 +79,33 @@ export class NetworkTable {
         this.subscribeAndPublish(topicName, topic, socket);
     }
 
-    subscribeAndPublish(topicName:string, topic:NetworkTablesTopic<any>, socket:Socket, ) {
+    topicForwardAny(topicName:string, topicType, socket:Socket) {
+        const topic = this.nt.createTopic("/SmartDashboard/" + topicName, topicType);
+
+        this.subscribeAndPublish(topicName, topic, socket);
+    }
+
+    subscribeAndPublish(topicName:string, topic:NetworkTablesTopic<any>, socket:Socket) {
+
+        //multiple fallbacks, socket be weird sometimes fr
+
+        setTimeout(() => {
+            socket.emit(topicName, topic.getValue());
+        },1000);
+
+        setTimeout(() => {
+            socket.emit(topicName, topic.getValue());
+        },3000);
+
+        setTimeout(() => {
+            socket.emit(topicName, topic.getValue());
+        },5000);
+
         topic.subscribe((val) => {
-            //console.log(chalk.yellow(val));
-            if (val) {
-                socket.volatile.emit(topicName, val);
+            if (val != null && val != undefined) {
+                socket.emit(topicName, val);
             }
-        });
+        })
 
         socket.on(topicName, (val) => {
             try {

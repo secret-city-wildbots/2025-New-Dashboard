@@ -9,6 +9,7 @@ interface NTBooleanReadoutProps {
     text: string;
     defaultVal?: boolean;
     index?: number;
+    chars?: number;
     onColor?: string;
     offColor?: string;
 }
@@ -19,6 +20,7 @@ const NTBooleanReadout = ({
     text,
     defaultVal = false,
     index,
+    chars,
     onColor,
     offColor,
 }:NTBooleanReadoutProps) => {
@@ -44,7 +46,7 @@ const NTBooleanReadout = ({
     }, [nt, socket, index])
 
     return (
-        <BooleanReadout text={text} onColor={onColor} offColor={offColor} on={value} />
+        <BooleanReadout text={text} chars={chars} onColor={onColor} offColor={offColor} on={value} />
     )
 }
 

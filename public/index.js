@@ -3879,11 +3879,11 @@ var AngleDisplay = ({
       ctx.clearRect(-100, -100, 1e4, 1e4);
       ctx.beginPath();
       ctx.arc(radius / 2, radius / 2, radius / 2, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255, 1, 152,0.7)";
+      ctx.fillStyle = "rgb(255, 1, 152)";
       ctx.fill();
       ctx.beginPath();
       ctx.arc(radius / 2, radius / 2, radius / 2 - Math.ceil(radius / 10), 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(40,40,45,1)";
+      ctx.fillStyle = "rgb(51, 51, 94)";
       ctx.fill();
       ctx.beginPath();
       ctx.moveTo(radius / 2, radius / 2);
@@ -3955,7 +3955,6 @@ var NTReadout = ({
           newVal = newVal[index];
         }
         if (precision !== void 0) {
-          console.log(nt, precision);
           if (precision == 0) {
             newVal = Math.floor(newVal);
           } else {
@@ -4090,7 +4089,6 @@ var SimpleSubsystem = ({
   const onRelease = () => {
     socket.emit("Calibrate_" + name, false);
   };
-  console.log(name + (velocity ? "_Velocity_(" + unit + ")" : "_Position_(" + unit + ")"));
   return /* @__PURE__ */ _(
     "div",
     {
@@ -4151,19 +4149,23 @@ var SwerveModules = ({
     justifyContent: "center",
     flexDirection: "column",
     wrap: "no-wrap"
-  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, round: 1, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, round: 1, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, round: 1, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, round: 1, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, round: 0.1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, round: 0.1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, round: 1, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, round: 1, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, round: 1, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, round: 1, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, round: 0.1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, round: 0.1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))));
+  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))));
 };
 var SwerveModules_default = SwerveModules;
 
 // components/BooleanReadout.tsx
 var BooleanReadout = ({
   text,
+  chars: chars2,
   onColor = "rgba(116, 255, 6, 0.8)",
   offColor = "rgba(200, 200, 200, 0.8)",
   on: on2 = false
 }) => {
   return /* @__PURE__ */ _("b", { class: "boolean-readout", style: {
-    backgroundColor: on2 ? onColor : offColor
+    backgroundColor: on2 ? onColor : offColor,
+    width: typeof chars2 === "number" ? "0" : "",
+    overflow: "hidden",
+    textAlign: "center"
   } }, text);
 };
 var BooleanReadout_default = BooleanReadout;
@@ -4175,6 +4177,7 @@ var NTBooleanReadout = ({
   text,
   defaultVal = false,
   index,
+  chars: chars2,
   onColor,
   offColor
 }) => {
@@ -4193,16 +4196,31 @@ var NTBooleanReadout = ({
       socket.off(nt, handler);
     };
   }, [nt, socket, index]);
-  return /* @__PURE__ */ _(BooleanReadout_default, { text, onColor, offColor, on: value2 });
+  return /* @__PURE__ */ _(BooleanReadout_default, { text, chars: chars2, onColor, offColor, on: value2 });
 };
 var NTBooleanReadout_default = NTBooleanReadout;
+
+// components/MasterStates.tsx
+var MasterStates = ({
+  masterStates,
+  socket,
+  dashboardItem = false
+}) => {
+  socket.on("Confirmed_States", (val) => {
+    console.log(val);
+  });
+  return /* @__PURE__ */ _("div", { class: "bubble " + (dashboardItem ? "column-item" : "") }, /* @__PURE__ */ _("div", { style: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
+  } }, masterStates.map((state, index) => /* @__PURE__ */ _("div", { style: "padding:1rem;" }, /* @__PURE__ */ _(NTBooleanReadout_default, { nt: "Confirmed_States", socket, chars: 4, index, text: state })))));
+};
+var MasterStates_default = MasterStates;
 
 // pages/index.tsx
 function pages_default() {
   const socket = lookup2();
-  socket.on("Swerve_0_Details", (vari) => {
-    console.log(vari);
-  });
   const tabs = [
     {
       title: "Checklist",
@@ -4275,21 +4293,7 @@ function pages_default() {
       chars: 2,
       socket
     }
-  )), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(
-    NTBooleanReadout_default,
-    {
-      text: "SIGMA",
-      socket,
-      nt: "Sigma_Active0"
-    }
-  ), /* @__PURE__ */ _(
-    NTBooleanReadout_default,
-    {
-      text: "SIGMA",
-      socket,
-      nt: "Sigma_Active1"
-    }
-  )))));
+  )), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(MasterStates_default, { socket, masterStates: ["STOW", "FEED", "SCOR", "CLMB"] })))));
 }
 
 // pages/indexLoader.tsx

@@ -38,10 +38,10 @@ const SwerveModules = ({
                     Angle (deg)
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_1_Details`} round={1} index={0} chars={4} socket={socket} angle />
+                    <NTReadout nt={`Swerve_1_Details`} precision={0} index={0} chars={4} socket={socket} angle />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_0_Details`} round={1} index={0} chars={4} socket={socket} angle />
+                    <NTReadout nt={`Swerve_0_Details`} precision={0} index={0} chars={4} socket={socket} angle />
                 </td>
             </tr>
             <tr>
@@ -49,10 +49,10 @@ const SwerveModules = ({
                     Temp (C) 
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_1_Details`} index={1} round={1} chars={2} socket={socket} temperature />
+                    <NTReadout nt={`Swerve_1_Details`} index={1} precision={0} chars={2} socket={socket} temperature />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_0_Details`} index={1} round={1} chars={2} socket={socket} temperature />
+                    <NTReadout nt={`Swerve_0_Details`} index={1} precision={0} chars={2} socket={socket} temperature />
                 </td>
             </tr>
             <tr>
@@ -60,10 +60,10 @@ const SwerveModules = ({
                     Vel (ft/s)
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_1_Details`} round={0.1} index={2} chars={3} socket={socket} />
+                    <NTReadout nt={`Swerve_1_Details`} precision={1} index={2} chars={3} socket={socket} />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_0_Details`} round={0.1} index={2} chars={3} socket={socket} />
+                    <NTReadout nt={`Swerve_0_Details`} precision={1} index={2} chars={3} socket={socket} />
                 </td>
             </tr>
             <tr>
@@ -95,10 +95,10 @@ const SwerveModules = ({
                     Angle (deg)
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_2_Details`} round={1} index={0} chars={4} socket={socket} angle />
+                    <NTReadout nt={`Swerve_2_Details`} precision={0} index={0} chars={4} socket={socket} angle />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_3_Details`} round={1} index={0} chars={4} socket={socket} angle />
+                    <NTReadout nt={`Swerve_3_Details`} precision={0} index={0} chars={4} socket={socket} angle />
                 </td>
             </tr>
             <tr>
@@ -106,10 +106,10 @@ const SwerveModules = ({
                     Temp (C) 
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_2_Details`} index={1} round={1} chars={2} socket={socket} temperature />
+                    <NTReadout nt={`Swerve_2_Details`} index={1} precision={0} chars={2} socket={socket} temperature />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_3_Details`} index={1} round={1} chars={2} socket={socket} temperature />
+                    <NTReadout nt={`Swerve_3_Details`} index={1} precision={0} chars={2} socket={socket} temperature />
                 </td>
             </tr>
             <tr>
@@ -117,10 +117,10 @@ const SwerveModules = ({
                     Vel (ft/s)
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_2_Details`} round={0.1} index={2} chars={3} socket={socket} />
+                    <NTReadout nt={`Swerve_2_Details`} precision={1} index={2} chars={3} socket={socket} />
                 </td>
                 <td>
-                    <NTReadout nt={`Swerve_3_Details`} round={0.1} index={2} chars={3} socket={socket} />
+                    <NTReadout nt={`Swerve_3_Details`} precision={1} index={2} chars={3} socket={socket} />
                 </td>
             </tr>
             <tr>

@@ -14,6 +14,8 @@ const NTOVERRIDE =
     Deno.args.includes("no-nt") ||
     Deno.args.includes("nt-override") ||
     Deno.args.includes("ignore-nt");
+const PRODUCTION = 
+    Deno.args.includes("production");
 
 /*
  This is a somewhat janky way to remove the annoying websocket errors in the case 
@@ -66,7 +68,9 @@ async function init() {
             (nt.nt.isRobotConnected() ? "nt connected" : "nt not connected")
     ));
 
-    await buildAll(); //build client js
+    if (!PRODUCTION) {
+        await buildAll(); //build client js
+    }
 
     const app = express();
     const server = http.createServer(app);
@@ -108,27 +112,56 @@ async function init() {
                         Math.random() < 0.7 ? "HIGH":"LOW"]);
                 }, 1001+(${i}*50));`)
             }
-            setInterval(() => {
-                socket.volatile.emit("Sigma_Active"+Math.round(Math.random()), Math.random() < 0.85);
-            }, 10);
         } else {
             //actual production usage
-            nt.topicForwardDouble("Control_Loop_Time", socket);
-            nt.topicForwardBoolean("Unlock_Pivot", socket);
-            nt.topicForwardBoolean("Unlock_Extender", socket);
-            nt.topicForwardBoolean("Unlock_Wrist", socket);
-            nt.topicForwardDouble("Wrist_Position_(deg)", socket);
-            nt.topicForwardDouble("Extender_Position_(in)", socket);
-            nt.topicForwardDouble("Pivot_Position_(deg)", socket);
-            nt.topicForwardDouble("Intake_Velocity_(rpm)", socket);
-            nt.topicForwardDoubleArray("Swerve_0_Details", socket);
-            nt.topicForwardDoubleArray("Swerve_1_Details", socket);
-            nt.topicForwardDoubleArray("Swerve_2_Details", socket);
-            nt.topicForwardDoubleArray("Swerve_3_Details", socket);
+            const ntTypes = {
+                "double": NetworkTablesTypeInfos.kDouble,
+                "double[]": NetworkTablesTypeInfos.kDoubleArray,
+                "boolean": NetworkTablesTypeInfos.kBoolean,
+                "boolean[]": NetworkTablesTypeInfos.kBooleanArray,
+                "string": NetworkTablesTypeInfos.kString,
+                "string[]": NetworkTablesTypeInfos.kStringArray
+            };
+            let topics = {
+                "Control_Loop_Time": "double",
+                "Unlock_Pivot": "boolean",
+                "Unlock_Wrist": "boolean",
+                "Unlock_Extender": "boolean",
+                "Wrist_Position_(deg)": "double",
+                "Extender_Position_(in)": "double",
+                "Pivot_Position_(deg)": "double",
+                "Intake_Velocity_(rpm)": "double",
+                "Intake_Temp_(C)": "double",
+                "Pivot_Temp_(C)": "double",
+                "Extender_Temp_(C)": "double",
+                "Wrist_Temp_(C)": "double",
+                "Swerve_0_Details": "double[]",
+                "Swerve_1_Details": "double[]",
+                "Swerve_2_Details": "double[]",
+                "Swerve_3_Details": "double[]",
+                "Confirmed_States": "boolean[]"
+            };
+            Object.keys(topics).forEach((topic) => {
+                nt.topicForwardAny(topic, ntTypes[topics[topic]], socket);
+            });
         }
     });
 
     server.listen(HOSTPORT, () => {
         console.info(chalk.green("server init complete, listening on port " + HOSTPORT));
+
+        const launchApp:Deno.Command = new Deno.Command("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", {
+            args: [
+                "--app=http://localhost:4265",
+                `--window-size=2000,830`,
+                "--window-position=0,0"
+            ]
+        });
+
+        if (PRODUCTION) {
+            setTimeout(() => {
+                launchApp.spawn();
+            },100);
+        }
     });
 }

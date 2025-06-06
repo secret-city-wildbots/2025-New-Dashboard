@@ -30,12 +30,12 @@ const AngleDisplay = ({
 
             ctx.beginPath();
             ctx.arc(radius/2, radius/2, radius/2, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(255, 1, 152,0.7)";
+            ctx.fillStyle = "rgb(255, 1, 152)";
             ctx.fill();
 
             ctx.beginPath();
             ctx.arc(radius/2, radius/2, radius/2-Math.ceil(radius/10), 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(40,40,45,1)";
+            ctx.fillStyle = "rgb(51, 51, 94)";
             ctx.fill();
 
             ctx.beginPath();
