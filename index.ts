@@ -14,8 +14,7 @@ const NTOVERRIDE =
     Deno.args.includes("no-nt") ||
     Deno.args.includes("nt-override") ||
     Deno.args.includes("ignore-nt");
-const PRODUCTION = 
-    Deno.args.includes("production");
+const PRODUCTION = Deno.args.includes("production");
 
 /*
  This is a somewhat janky way to remove the annoying websocket errors in the case 
@@ -46,7 +45,7 @@ console.warn = function (...args: any[]) {
         }
     }
     originalConsoleWarn(message);
-}
+};
 
 const nt = new NetworkTable(URI, PORT); //network tables
 
@@ -63,10 +62,12 @@ if (NTOVERRIDE) {
 }
 
 async function init() {
-    console.info(chalk.cyan(
-        "server init started with " +
-            (nt.nt.isRobotConnected() ? "nt connected" : "nt not connected")
-    ));
+    console.info(
+        chalk.cyan(
+            "server init started with " +
+                (nt.nt.isRobotConnected() ? "nt connected" : "nt not connected")
+        )
+    );
 
     if (!PRODUCTION) {
         await buildAll(); //build client js
@@ -74,6 +75,8 @@ async function init() {
 
     const app = express();
     const server = http.createServer(app);
+
+    let pagesCache = {};
 
     app.get(
         /.*\/$/,
@@ -90,43 +93,85 @@ async function init() {
             }
         }
     );
-    app.use(express.static("public")); //actually serve the files from the public dir
+
+    app.use(express.static("public")); //actually serve the files from the public dir (DONT CHANGE THIS LINE!!!)
 
     //socket setup
     const io = new Server(server);
 
     io.on("connection", (socket) => {
+        if (PRODUCTION) {
+            console.info(chalk.green("Frontend Connected!"));
+        }
         //put all nt forwards right here
 
         if (NTOVERRIDE) {
             //for testing socket connection
             setInterval(() => {
-                socket.volatile.emit("Control_Loop_Time", Math.random() * 2 + 20);
-            }, 51);
+                socket.volatile.emit(
+                    "Control_Loop_Time",
+                    Math.random() * 2 + 20
+                );
+            }, 50);
+            setInterval(() => {
+                socket.emit("Master_States", [
+                    true,
+                    false,
+                    false,
+                    false,
+                ]);
+            }, 100);
+            setInterval(() => {
+                socket.emit("Legal_Actuator_Names", [
+                    "No_Test",
+                    "Compressor_(p)",
+                    "Drive_0_(p)",
+                    "Drive_1_(p)",
+                    "Drive_2_(p)",
+                    "Drive_3_(p)",
+                    "Azimuth_0_(p)",
+                    "Azimuth_1_(p)",
+                    "Azimuth_2_(p)",
+                    "Azimuth_3_(p)",
+                    "Swerve_Shifter_(b)",
+                    "Drivetrain_(p)",
+                    "Wrist_(p)",
+                    "Pivot_(p)",
+                    "Extender_(p)",
+                    "Intake_(p)",
+                ]);
+            }, 1000);
+            setInterval(() => {
+                socket.emit("Legal_Drivers", [
+                    "Devin",
+                    "Kidz",
+                ]);
+            }, 1000);
             for (let i = 0; i <= 3; i++) {
                 eval(`setInterval(() => {
-                    socket.volatile.emit("Swerve_${i}_Details", [
+                    socket.emit("Swerve_${i}_Details", [
                         Math.round(Math.random() * 360),
                         Math.random()*30+40,
                         (Math.random() < 0.2) ? Math.round(Math.random()*32-16):0,
-                        Math.random() < 0.7 ? "HIGH":"LOW"]);
-                }, 1001+(${i}*50));`)
+                        Math.random() < 0.9 ? "HIGH":"LOW"]);
+                }, 1001+(${i}*50));`);
             }
         } else {
             //actual production usage
             const ntTypes = {
-                "double": NetworkTablesTypeInfos.kDouble,
+                double: NetworkTablesTypeInfos.kDouble,
                 "double[]": NetworkTablesTypeInfos.kDoubleArray,
-                "boolean": NetworkTablesTypeInfos.kBoolean,
+                boolean: NetworkTablesTypeInfos.kBoolean,
                 "boolean[]": NetworkTablesTypeInfos.kBooleanArray,
-                "string": NetworkTablesTypeInfos.kString,
-                "string[]": NetworkTablesTypeInfos.kStringArray
+                string: NetworkTablesTypeInfos.kString,
+                "string[]": NetworkTablesTypeInfos.kStringArray,
             };
-            let topics = {
-                "Control_Loop_Time": "double",
-                "Unlock_Pivot": "boolean",
-                "Unlock_Wrist": "boolean",
-                "Unlock_Extender": "boolean",
+            const topics = {
+                Control_Loop_Time: ["double", "volatile"],
+                Unlock_Pivot: ["boolean", "", "subs"],
+                Unlock_Wrist: ["boolean", "", "subs"],
+                Unlock_Extender: ["boolean", "", "subs"],
+                Calibrate_Extender: ["boolean", "", "subs"],
                 "Wrist_Position_(deg)": "double",
                 "Extender_Position_(in)": "double",
                 "Pivot_Position_(deg)": "double",
@@ -135,33 +180,77 @@ async function init() {
                 "Pivot_Temp_(C)": "double",
                 "Extender_Temp_(C)": "double",
                 "Wrist_Temp_(C)": "double",
-                "Swerve_0_Details": "double[]",
-                "Swerve_1_Details": "double[]",
-                "Swerve_2_Details": "double[]",
-                "Swerve_3_Details": "double[]",
-                "Confirmed_States": "boolean[]"
+
+                Unlock_Azimuth: ["boolean", "", "subs"],
+                Calibrate_Wheels: ["boolean", "", "subs"],
+                Home_Wheels: ["boolean", "", "subs"],
+                Swerve_0_Details: "double[]",
+                Swerve_1_Details: "double[]",
+                Swerve_2_Details: "double[]",
+                Swerve_3_Details: "double[]",
+                Confirmed_States: "boolean[]",
+
+                Test_Actuator_Name: ["string", "", "subs"],
+                Legal_Actuator_Names: "string[]",
+                Test_Actuator_Value: ["double", "", "subs"],
+                Test_Actuator_Period: ["double", "", "subs"],
+
+                Selected_Driver: ["string", "", "subs"],
+                Legal_Drivers: "string[]",
+                New_Driver_Profile_Setpoints: ["double[]", "", "subs"],
+                Current_Driver_Profile_Setpoints: "double[]",
             };
             Object.keys(topics).forEach((topic) => {
-                nt.topicForwardAny(topic, ntTypes[topics[topic]], socket);
+                //ignore these errors. it's all fine. dont worry abt it
+                if (typeof topics[topic] == "string") {
+                    nt.topicForwardAny(topic, ntTypes[topics[topic]], socket);
+                } else {
+                    const likeAndSubscwibeUWU = !(ntTypes[topics[topic][2]] == "subs");
+                    console.log(likeAndSubscwibeUWU)
+
+                    if (topics[topic][1] == "volatile") {
+                        nt.topicForwardAny(
+                            topic,
+                            ntTypes[topics[topic][0]],
+                            socket,
+                            true,
+                            likeAndSubscwibeUWU
+                        );
+                    } else {
+                        nt.topicForwardAny(
+                            topic,
+                            ntTypes[topics[topic][0]],
+                            socket,
+                            false,
+                            likeAndSubscwibeUWU
+                        );
+                    }
+                }
             });
         }
     });
 
     server.listen(HOSTPORT, () => {
-        console.info(chalk.green("server init complete, listening on port " + HOSTPORT));
+        console.info(
+            chalk.green("server init complete, listening on port " + HOSTPORT)
+        );
 
-        const launchApp:Deno.Command = new Deno.Command("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", {
-            args: [
-                "--app=http://localhost:4265",
-                `--window-size=2000,830`,
-                "--window-position=0,0"
-            ]
-        });
+        const launchApp: Deno.Command = new Deno.Command(
+            "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            {
+                args: [
+                    "--app=http://localhost:4265",
+                    `--window-size=2000,830`,
+                    "--window-position=0,0",
+                ],
+            }
+        );
 
         if (PRODUCTION) {
             setTimeout(() => {
+                console.info(chalk.cyan("Launching frontend"));
                 launchApp.spawn();
-            },100);
+            }, 1000);
         }
     });
 }

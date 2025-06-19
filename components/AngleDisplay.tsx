@@ -24,7 +24,7 @@ const AngleDisplay = ({
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
-        if (ctx) {  
+        if (ctx) {
 
             ctx.clearRect(-100,-100,10000,10000);
 

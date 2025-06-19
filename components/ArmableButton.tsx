@@ -3,6 +3,7 @@ import { useState } from "npm:preact/hooks";
 
 import Button from "./Button.tsx";
 import Switch from "./Switch.tsx";
+import FlexRow from "./FlexRow.tsx";
 
 interface ArmableButtonProps {
   text: string;
@@ -24,7 +25,7 @@ const ArmableButton = ({
   const [isDisabled, setIsDisabled] = useState(disabled);
 
   return (
-    <div style="display: flex; justify-center: center; align-items: center;">
+    <FlexRow noPadding>
         <div style="margin-right: 10px; height: 100%;">
             <Button text={text}
                 color={btnColor}
@@ -34,7 +35,7 @@ const ArmableButton = ({
             />
         </div>
         <Switch onColor="#ef0001" offColor="rgba(116, 255, 6, 1)" onToggle={(on:boolean) => { setIsDisabled(!on); onToggle?.(on) }} />
-    </div>
+    </FlexRow>
   );
 };
 

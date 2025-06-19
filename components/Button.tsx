@@ -1,11 +1,12 @@
-import { h } from 'npm:preact';
+import { ComponentChildren, h } from 'npm:preact';
 
 interface ButtonProps {
-  text: string;
+  text: string|ComponentChildren;
   onClick?: () => void;
   onRelease?: () => void;
   disabled?: boolean;
   color?: string;
+  style?: {};
 }
 
 const Button = ({
@@ -14,6 +15,7 @@ const Button = ({
   onRelease,
   disabled = false,
   color = 'rgb(68,142,205)',
+  style,
 }: ButtonProps) => {
   const buttonClass = `button${disabled ? ' disabled' : ''}`;
 
@@ -25,6 +27,7 @@ const Button = ({
       onMouseUp={() => !disabled && onRelease?.()}
       style={{
         backgroundColor: color,
+        ...(style ? style:{})
       }}
       disabled={disabled}
     >

@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
+  for (var name2 in all)
+    __defProp(target, name2, { get: all[name2], enumerable: true });
 };
 
 // ../../AppData/Local/deno/deno_esbuild/preact@10.26.7/node_modules/preact/dist/preact.module.js
@@ -1622,10 +1622,10 @@ var SocketWithoutUpgrade = class _SocketWithoutUpgrade extends Emitter {
    * @return {Transport}
    * @private
    */
-  createTransport(name) {
+  createTransport(name2) {
     const query = Object.assign({}, this.opts.query);
     query.EIO = protocol;
-    query.transport = name;
+    query.transport = name2;
     if (this.id)
       query.sid = this.id;
     const opts = Object.assign({}, this.opts, {
@@ -1634,8 +1634,8 @@ var SocketWithoutUpgrade = class _SocketWithoutUpgrade extends Emitter {
       hostname: this.hostname,
       secure: this.secure,
       port: this.port
-    }, this.opts.transportOptions[name]);
-    return new this._transportsByName[name](opts);
+    }, this.opts.transportOptions[name2]);
+    return new this._transportsByName[name2](opts);
   }
   /**
    * Initializes transport to use and starts probe.
@@ -1974,8 +1974,8 @@ var SocketWithUpgrade = class extends SocketWithoutUpgrade {
    * @param {String} name - transport name
    * @private
    */
-  _probe(name) {
-    let transport = this.createTransport(name);
+  _probe(name2) {
+    let transport = this.createTransport(name2);
     let failed = false;
     SocketWithoutUpgrade.priorWebsocketSuccess = false;
     const onTransportOpen = () => {
@@ -2048,7 +2048,7 @@ var SocketWithUpgrade = class extends SocketWithoutUpgrade {
     transport.once("close", onTransportClose);
     this.once("close", onclose);
     this.once("upgrading", onupgrade);
-    if (this._upgrades.indexOf("webtransport") !== -1 && name !== "webtransport") {
+    if (this._upgrades.indexOf("webtransport") !== -1 && name2 !== "webtransport") {
       this.setTimeoutFn(() => {
         if (!failed) {
           transport.open();
@@ -3852,7 +3852,9 @@ function TabbedContainer({ tabs }) {
 }
 
 // components/Container.tsx
-function Container({ children }) {
+function Container({
+  children
+}) {
   return /* @__PURE__ */ _("div", { class: "container-fluid row" }, children);
 }
 
@@ -3906,7 +3908,7 @@ var Readout = ({
   color = "#eed",
   temperature = false
 }) => {
-  return /* @__PURE__ */ _(
+  return /* @__PURE__ */ _("div", null, /* @__PURE__ */ _(
     "b",
     {
       style: {
@@ -3916,10 +3918,15 @@ var Readout = ({
           alignItems: "center",
           flexDirection: "row",
           color,
-          width: chars2 ? chars2 * 1.5 + "rem" : void 0
+          width: chars2 ? `${chars2 * 1.3}rem` : void 0,
+          fontSize: "1.2rem",
+          lineHeight: "1.2rem",
+          paddingTop: "0.2rem",
+          paddingBottom: "0.2rem"
         } : {
+          display: "inline-block",
           color,
-          width: chars2 ? chars2 * 1.5 + "rem" : void 0
+          width: chars2 ? `${chars2 * 1.3}rem` : void 0
         },
         ...temperature ? Number(text) > 60 ? {
           borderColor: "red"
@@ -3929,8 +3936,8 @@ var Readout = ({
       },
       class: "readout" + (small ? " small" : "")
     },
-    angle ? /* @__PURE__ */ _(k, null, /* @__PURE__ */ _("div", { style: "padding-right: 0.5rem;" }, text), /* @__PURE__ */ _("div", null, /* @__PURE__ */ _(AngleDisplay_default, { angle: Number(text) }))) : /* @__PURE__ */ _(k, null, text)
-  );
+    angle ? /* @__PURE__ */ _(k, null, /* @__PURE__ */ _("div", { style: "padding-right: 0.5rem;" }, angle ? text?.toString().padStart(3, "0") : text), /* @__PURE__ */ _("div", null, /* @__PURE__ */ _(AngleDisplay_default, { angle: Number(text), radius: 25 }))) : /* @__PURE__ */ _(k, null, text)
+  ));
 };
 var Readout_default = Readout;
 
@@ -3979,7 +3986,8 @@ var Button = ({
   onClick,
   onRelease,
   disabled = false,
-  color = "rgb(68,142,205)"
+  color = "rgb(68,142,205)",
+  style
 }) => {
   const buttonClass = `button${disabled ? " disabled" : ""}`;
   return /* @__PURE__ */ _(
@@ -3990,7 +3998,8 @@ var Button = ({
       onMouseDown: () => !disabled && onClick?.(),
       onMouseUp: () => !disabled && onRelease?.(),
       style: {
-        backgroundColor: color
+        backgroundColor: color,
+        ...style ? style : {}
       },
       disabled
     },
@@ -4039,6 +4048,25 @@ var Switch = ({
 };
 var Switch_default = Switch;
 
+// components/FlexRow.tsx
+function FlexRow({
+  children,
+  noPadding = false
+}) {
+  return /* @__PURE__ */ _("div", { style: "display: flex; justify-center: center; align-items: center;" }, noPadding ? children : children.map((item, index) => {
+    return (
+      // apply styles padding only when the item isn't the last one
+      /* @__PURE__ */ _(
+        "div",
+        {
+          style: index < children.length ? { paddingRight: "0.5rem" } : {}
+        },
+        item
+      )
+    );
+  }));
+}
+
 // components/ArmableButton.tsx
 var ArmableButton = ({
   text,
@@ -4049,7 +4077,7 @@ var ArmableButton = ({
   btnColor = "rgb(68,142,205)"
 }) => {
   const [isDisabled, setIsDisabled] = d2(disabled);
-  return /* @__PURE__ */ _("div", { style: "display: flex; justify-center: center; align-items: center;" }, /* @__PURE__ */ _("div", { style: "margin-right: 10px; height: 100%;" }, /* @__PURE__ */ _(
+  return /* @__PURE__ */ _(FlexRow, { noPadding: true }, /* @__PURE__ */ _("div", { style: "margin-right: 10px; height: 100%;" }, /* @__PURE__ */ _(
     Button_default,
     {
       text,
@@ -4065,43 +4093,44 @@ var ArmableButton = ({
 };
 var ArmableButton_default = ArmableButton;
 
-// components/SimpleSubsystem.tsx
+// panels/SimpleSubsystem.tsx
 var SimpleSubsystem = ({
   absolute = false,
   unit,
   gearRatio = 1,
   dashboardItem = false,
+  fillContainer = false,
   velocity = false,
   precision = 0,
   socket,
-  name
+  name: name2
 }) => {
   if (!unit) {
     unit = velocity ? "rpm" : "deg";
   }
   const onToggle = (on2) => {
-    socket.emit("Unlock_" + name, on2);
-    console.log("Setting " + name + " to " + on2);
+    socket.emit("Unlock_" + name2, on2);
+    console.log("Setting " + name2 + " to " + on2);
   };
   const onClick = () => {
-    socket.emit("Calibrate_" + name, true);
+    socket.emit("Calibrate_" + name2, true);
   };
   const onRelease = () => {
-    socket.emit("Calibrate_" + name, false);
+    socket.emit("Calibrate_" + name2, false);
   };
   return /* @__PURE__ */ _(
     "div",
     {
-      class: "bubble " + (dashboardItem ? "column-item" : ""),
+      class: "bubble" + (dashboardItem ? " column-item" : "") + (fillContainer ? " h-100" : ""),
       style: {
         //vertically align in column
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
-        padding: "1rem"
+        padding: fillContainer ? "0.5rem" : "1rem"
       }
     },
-    /* @__PURE__ */ _("label", null, name),
+    /* @__PURE__ */ _("label", null, name2),
     !velocity && !absolute ? /* @__PURE__ */ _(k, null, /* @__PURE__ */ _(
       ArmableButton_default,
       {
@@ -4110,46 +4139,62 @@ var SimpleSubsystem = ({
         onClick,
         onRelease
       }
-    ), /* @__PURE__ */ _("br", null)) : /* @__PURE__ */ _(k, null),
+    ), !(typeof InstallTrigger !== "undefined") ? /* @__PURE__ */ _(k, null) : /* @__PURE__ */ _("br", null)) : /* @__PURE__ */ _(k, null),
     absolute ? /* @__PURE__ */ _("div", { style: {
       //vertically align them in a row. should prob split this into a class.
       display: "flex",
       justifyContent: "center",
       flexDirection: "row",
       alignItems: "center"
-    } }, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("div", { style: "min-height: 2.5rem; margin-top: 1rem;" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, velocity ? "Vel" : "Pos", " (", unit, ")"), /* @__PURE__ */ _(
+    } }, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("div", { style: "min-height: 2.5rem; margin-top: 1rem;", class: "flex-row" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, velocity ? "Vel" : "Pos", " (", unit, ")"), /* @__PURE__ */ _(
       NTReadout_default,
       {
-        nt: name + (velocity ? "_Velocity_(" + unit + ")" : "_Position_(" + unit + ")"),
+        nt: name2 + (velocity ? "_Velocity_(" + unit + ")" : "_Position_(" + unit + ")"),
         precision,
-        chars: 4,
+        chars: 3,
         socket
       }
-    )), /* @__PURE__ */ _("div", { style: "min-height: 2.5rem" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, "Temp (C)"), /* @__PURE__ */ _(NTReadout_default, { nt: name + "_Temp_(C)", socket, temperature: true }))), /* @__PURE__ */ _("div", { style: "margin-left: 0.25rem;" }, /* @__PURE__ */ _(Switch_default, { onColor: "#ef0001", offColor: "rgba(116, 255, 6, 1)", onToggle, vertical: true }))) : /* @__PURE__ */ _(k, null, /* @__PURE__ */ _("div", { style: "min-height: 2.5rem; margin-top: 1rem;" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, velocity ? "Vel" : "Pos", " (", unit, ")"), /* @__PURE__ */ _(
+    )), /* @__PURE__ */ _("div", { style: "min-height: 2.5rem", class: "flex-row" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, "Temp (C)"), /* @__PURE__ */ _(NTReadout_default, { nt: name2 + "_Temp_(C)", socket, precision: 3, temperature: true }))), /* @__PURE__ */ _("div", { style: "margin-left: 0.25rem;" }, /* @__PURE__ */ _(Switch_default, { onColor: "#ef0001", offColor: "rgba(116, 255, 6, 1)", onToggle, vertical: true }))) : /* @__PURE__ */ _(k, null, /* @__PURE__ */ _("div", { style: "min-height: 2.5rem; margin-top: 0.5rem;", class: "flex-row" }, /* @__PURE__ */ _("label", { class: "label-small pr-2" }, velocity ? "Vel" : "Pos", " (", unit, ")"), /* @__PURE__ */ _(
       NTReadout_default,
       {
-        nt: name + (velocity ? "_Velocity_(" + unit + ")" : "_Position_(" + unit + ")"),
+        nt: name2 + (velocity ? "_Velocity_(" + unit + ")" : "_Position_(" + unit + ")"),
         precision,
-        chars: 4,
+        chars: 3,
         socket
       }
-    )), /* @__PURE__ */ _("div", { style: "min-height: 2.5rem" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, "Temp (C)"), /* @__PURE__ */ _(NTReadout_default, { nt: name + "_Temp_(C)", socket, temperature: true })))
+    )), /* @__PURE__ */ _("div", { style: "min-height: 2.5rem", class: "flex-row" }, /* @__PURE__ */ _("label", { class: "label-small pr-3" }, "Temp (C)"), /* @__PURE__ */ _(NTReadout_default, { nt: name2 + "_Temp_(C)", socket, precision: 3, temperature: true })))
   );
 };
 var SimpleSubsystem_default = SimpleSubsystem;
 
-// components/SwerveModules.tsx
+// panels/SwerveModules.tsx
 var SwerveModules = ({
   socket,
   dashboardItem = false,
   shifting = false
 }) => {
+  const onToggleUnlock = (on2) => {
+    socket.emit("Unlock_Azimuth", on2);
+    console.log("Setting " + name + " to " + on2);
+  };
+  const onClickCalib = () => {
+    socket.emit("Calibrate_Wheels", true);
+  };
+  const onReleaseCalib = () => {
+    socket.emit("Calibrate_Wheels", false);
+  };
+  const onClickHome = () => {
+    socket.emit("Home_Wheels", true);
+  };
+  const onReleaseHome = () => {
+    socket.emit("Home_Wheels", false);
+  };
   return /* @__PURE__ */ _("div", { class: "swerve-modules " + (dashboardItem ? "column-item" : ""), style: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
     wrap: "no-wrap"
-  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, precision: 0, chars: 2, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 1, index: 2, chars: 3, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 1, index: 2, chars: 3, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))));
+  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("div", { style: "display: flex; justify-center: center; align-items: center; padding-top: 1rem;" }, /* @__PURE__ */ _("div", { style: "padding-right: 0.4rem;" }, /* @__PURE__ */ _(Button_default, { text: "HOME", onClick: onClickHome, onRelease: onReleaseHome })), /* @__PURE__ */ _(ArmableButton_default, { text: "CALIB", onClick: onClickCalib, onRelease: onReleaseCalib })));
 };
 var SwerveModules_default = SwerveModules;
 
@@ -4200,7 +4245,7 @@ var NTBooleanReadout = ({
 };
 var NTBooleanReadout_default = NTBooleanReadout;
 
-// components/MasterStates.tsx
+// panels/MasterStates.tsx
 var MasterStates = ({
   masterStates,
   socket,
@@ -4218,6 +4263,372 @@ var MasterStates = ({
 };
 var MasterStates_default = MasterStates;
 
+// components/DashboardSubRow.tsx
+function DashboardSubRow({
+  children
+}) {
+  return /* @__PURE__ */ _("div", { class: "row d-flex align-items-stretch column-item p-0" }, children.map((item, index) => {
+    return (
+      // apply styles padding only when the item isn't the last one
+      /* @__PURE__ */ _(
+        "div",
+        {
+          class: "col",
+          style: index < children.length - 1 ? { paddingRight: "0.5rem" } : {}
+        },
+        item
+      )
+    );
+  }));
+}
+
+// panels/FieldMap.tsx
+var FieldMap = ({
+  socket
+}) => {
+  const canvasRef = A2(null);
+  const imageRef = A2(null);
+  function render(canvasRef2, imageRef2) {
+    const canvas = canvasRef2.current;
+    if (!canvas)
+      return;
+    if (!imageRef2.current)
+      return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx)
+      return;
+    const robotPos = [24, 24];
+    const robotSize = [21.75, 23.75];
+    const bottomLeft = [289, 3465];
+    const fieldWidth = 317;
+    const fieldWidthpx = 1634 - 289;
+    const fieldScale = fieldWidthpx / fieldWidth;
+    const robotPospx = [robotPos[0] * fieldScale + bottomLeft[0], robotPos[1] * fieldScale + bottomLeft[1]];
+    const robotSizepx = [robotSize[0] * fieldScale, robotSize[1] * fieldScale];
+    ctx.drawImage(imageRef2.current, 0, 0);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(robotPospx[0], canvas.height - robotPospx[1], robotSizepx[0], robotSizepx[1]);
+  }
+  y2(() => {
+    render(canvasRef, imageRef);
+  }, [canvasRef, imageRef]);
+  setTimeout(() => {
+    render(canvasRef, imageRef);
+  }, 200);
+  return /* @__PURE__ */ _(k, null, /* @__PURE__ */ _("canvas", { ref: canvasRef, width: 1926, height: 3999, style: "width: 193px;" }), /* @__PURE__ */ _("img", { ref: imageRef, style: "display:none", src: `/assets/fieldmap${"red"}.png` }));
+};
+var FieldMap_default = FieldMap;
+
+// components/Dropdown.tsx
+var Dropdown = ({ label, items, valSetter }) => {
+  if (!label) {
+    label = items[0];
+  }
+  valSetter(label);
+  const [isOpen, setIsOpen] = d2(false);
+  const [selectedLabel, setSelectedLabel] = d2(label);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  document.addEventListener("click", (e3) => {
+    if (!e3.target.classList.contains("dropdown-toggle")) {
+      setIsOpen(false);
+    }
+  });
+  const handleItemClick = (item) => {
+    setSelectedLabel(item);
+    valSetter(item);
+  };
+  return /* @__PURE__ */ _("div", { class: "dropdown" }, /* @__PURE__ */ _(
+    "button",
+    {
+      class: "btn dropdown-toggle",
+      type: "button",
+      onClick: toggleMenu,
+      "aria-expanded": isOpen
+    },
+    selectedLabel
+  ), /* @__PURE__ */ _("ul", { class: `dropdown-menu${isOpen ? " show" : ""}` }, items.map((item, index) => /* @__PURE__ */ _("li", { key: index }, /* @__PURE__ */ _(
+    "button",
+    {
+      class: "dropdown-item" + (item == selectedLabel ? " active" : ""),
+      onClick: () => handleItemClick(item)
+    },
+    item
+  )))));
+};
+var Dropdown_default = Dropdown;
+
+// components/Input.tsx
+var Input = ({
+  valSetter = (val) => {
+  },
+  defaultVal,
+  chars: chars2 = 5,
+  small = false,
+  number = false,
+  color = "#eed",
+  precision,
+  arrowIncrement = 0.1
+}) => {
+  if (!(typeof defaultVal == void 0 || typeof defaultVal == null)) {
+    if (number)
+      defaultVal = 0;
+    else
+      defaultVal = "";
+  }
+  const [shiftPressed, setShiftPressed] = d2(false);
+  const [ctrlPressed, setCtrlPressed] = d2(false);
+  const [currentVal, setCurrentVal] = d2(defaultVal);
+  const inputRef = A2(null);
+  y2(() => {
+    const onKeyDown = (e3) => {
+      setShiftPressed(e3.shiftKey);
+      setCtrlPressed(e3.ctrlKey);
+    };
+    const onKeyUp = (e3) => {
+      setShiftPressed(e3.shiftKey);
+      setCtrlPressed(e3.ctrlKey);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("keyup", onKeyUp);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keyup", onKeyUp);
+    };
+  }, []);
+  const onUpdate = () => {
+    if (inputRef.current) {
+      let newVal = inputRef.current.value;
+      if (number) {
+        newVal = parseFloat(newVal);
+        if (isNaN(newVal))
+          newVal = 0;
+        if (precision !== void 0) {
+          if (precision == 0) {
+            newVal = Math.floor(newVal);
+          } else {
+            newVal = newVal.toFixed(precision);
+            newVal = parseFloat(newVal);
+            if (isNaN(newVal))
+              newVal = 0;
+          }
+        }
+      }
+      valSetter(newVal);
+      setCurrentVal(newVal);
+    }
+  };
+  const increment = () => {
+    if (!inputRef.current)
+      return;
+    let v3 = parseFloat(inputRef.current.value);
+    if (isNaN(v3))
+      v3 = 0;
+    inputRef.current.value = (v3 + arrowIncrement * (ctrlPressed ? 10 : 1)).toString();
+    onUpdate();
+  };
+  const decrement = () => {
+    if (!inputRef.current)
+      return;
+    let v3 = parseFloat(inputRef.current.value);
+    if (isNaN(v3))
+      v3 = 0;
+    inputRef.current.value = (v3 - arrowIncrement * (ctrlPressed ? 10 : 1)).toString();
+    onUpdate();
+  };
+  return /* @__PURE__ */ _(
+    "div",
+    {
+      style: {
+        position: "relative",
+        // ← make this the containing block
+        display: "grid",
+        gridTemplateColumns: shiftPressed ? "1fr auto" : "1fr",
+        alignItems: "center",
+        width: `calc(${chars2}ch + 3rem)`,
+        maxWidth: "100%",
+        gap: 0
+      }
+    },
+    /* @__PURE__ */ _(
+      "input",
+      {
+        type: number ? "number" : "text",
+        ref: inputRef,
+        value: currentVal,
+        onInput: onUpdate,
+        class: "readout" + (small ? " small" : ""),
+        style: {
+          color,
+          width: "100%",
+          minWidth: 0,
+          paddingRight: number && !shiftPressed ? "1.9rem" : "0.5rem",
+          borderTopRightRadius: shiftPressed ? 0 : void 0,
+          borderBottomRightRadius: shiftPressed ? 0 : void 0
+        }
+      }
+    ),
+    shiftPressed && /* @__PURE__ */ _(
+      Button_default,
+      {
+        text: /* @__PURE__ */ _(
+          "svg",
+          {
+            xmlns: "http://www.w3.org/2000/svg",
+            width: "16",
+            height: "16",
+            fill: "currentColor",
+            viewBox: "0 0 16 16"
+          },
+          /* @__PURE__ */ _("path", { d: "M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" }),
+          /* @__PURE__ */ _("path", { d: "M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" })
+        ),
+        onClick: onUpdate,
+        style: {
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0,
+          height: "100%",
+          padding: "0.3rem 0.5rem"
+        }
+      }
+    ),
+    number && !shiftPressed && /* @__PURE__ */ _(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          right: "0.5rem",
+          // tweak to sit inside padding
+          top: "50%",
+          transform: "translateY(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.1rem",
+          pointerEvents: "none"
+          // let clicks through to the Buttons
+        }
+      },
+      /* @__PURE__ */ _(
+        Button_default,
+        {
+          text: "\u25B2",
+          onClick: increment,
+          style: {
+            pointerEvents: "auto",
+            // re-enable clicks on the arrows
+            padding: "0 0.4rem",
+            fontSize: "0.8rem",
+            lineHeight: 1,
+            borderRadius: "0.25rem"
+          }
+        }
+      ),
+      /* @__PURE__ */ _(
+        Button_default,
+        {
+          text: "\u25BC",
+          onClick: decrement,
+          style: {
+            pointerEvents: "auto",
+            padding: "0 0.4rem",
+            fontSize: "0.8rem",
+            lineHeight: 1,
+            borderRadius: "0.25rem"
+          }
+        }
+      )
+    )
+  );
+};
+var Input_default = Input;
+
+// components/NTInput.tsx
+var NTInput = ({
+  nt,
+  socket,
+  defaultVal,
+  number = false,
+  chars: chars2,
+  precision,
+  color,
+  small
+}) => {
+  if (defaultVal == void 0 || defaultVal == null) {
+    if (number)
+      defaultVal = 0;
+    else
+      defaultVal = "";
+  }
+  socket.emit(nt, defaultVal);
+  const setValueWrapper = (newVal) => {
+    socket.emit(nt, newVal);
+  };
+  return /* @__PURE__ */ _(Input_default, { number, chars: chars2, color, small, precision, defaultVal, valSetter: setValueWrapper });
+};
+var NTInput_default = NTInput;
+
+// panels/ActuatorTesting.tsx
+var ActuatorTesting = ({
+  socket,
+  dashboardItem = false
+}) => {
+  const [actuator, setActuator] = d2("No_Test");
+  const [actuatorNames, setActuatorNames] = d2(["No_Test"]);
+  socket.on("Legal_Actuator_Names", (val) => {
+    setActuatorNames(val);
+  });
+  const setActuatorVal = (newVal) => {
+    setActuator(newVal);
+    socket.emit("Test_Actuator_Name", actuator);
+  };
+  return /* @__PURE__ */ _(
+    "div",
+    {
+      class: "actuator-testing" + (dashboardItem ? " column-item" : ""),
+      style: {
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        wrap: "no-wrap"
+      }
+    },
+    /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Name:")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Value:")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Period:"))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(Dropdown_default, { items: actuatorNames, valSetter: setActuatorVal })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Value", defaultVal: 0, number: true, precision: 2 })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Period", defaultVal: 0, number: true, precision: 1 }))))
+  );
+};
+var ActuatorTesting_default = ActuatorTesting;
+
+// panels/DriverProfiles.tsx
+var DriverProfiles = ({
+  socket,
+  dashboardItem = false
+}) => {
+  const [driver, setDriver] = d2("Devin");
+  const [driverNames, setDriverNames] = d2(["Devin"]);
+  socket.on("Legal_Drivers", (val) => {
+    setDriverNames(val);
+    socket.emit("Selected_Driver", driver);
+  });
+  const setDriverVal = (newVal) => {
+    setDriver(newVal);
+    socket.emit("Selected_Driver", driver);
+  };
+  return /* @__PURE__ */ _(
+    "div",
+    {
+      class: "driver-profiles" + (dashboardItem ? " column-item" : ""),
+      style: {
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        wrap: "no-wrap"
+      }
+    },
+    /* @__PURE__ */ _(Dropdown_default, { items: driverNames, valSetter: setDriverVal }),
+    /* @__PURE__ */ _(Input_default, null)
+  );
+};
+var DriverProfiles_default = DriverProfiles;
+
 // pages/index.tsx
 function pages_default() {
   const socket = lookup2();
@@ -4232,24 +4643,25 @@ function pages_default() {
     },
     {
       title: "TeleOp",
-      content: /* @__PURE__ */ _(Container, null, "oooh camera feeds. very sleek")
+      content: /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _(FieldMap_default, { socket }))
     },
     {
       title: "Tune",
-      content: /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row bubble" }, /* @__PURE__ */ _("div", { class: "col-4 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Drivetrain"), /* @__PURE__ */ _(
+      content: /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row bubble" }, /* @__PURE__ */ _("div", { class: "col-3 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Drivetrain"), /* @__PURE__ */ _(
         SwerveModules_default,
         {
           socket,
           shifting: true,
           dashboardItem: true
         }
-      )))), /* @__PURE__ */ _("div", { class: "col-4 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("h3", null, "Profiles")), /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("h3", null, "Actuator Testing"))), /* @__PURE__ */ _("div", { class: "col-4 column" }, /* @__PURE__ */ _(
+      )))), /* @__PURE__ */ _("div", { class: "col-3 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Profiles"), /* @__PURE__ */ _(DriverProfiles_default, { socket })))), /* @__PURE__ */ _("div", { class: "col-5 column" }, /* @__PURE__ */ _(DashboardSubRow, null, /* @__PURE__ */ _(
         SimpleSubsystem_default,
         {
           name: "Pivot",
           socket,
           absolute: true,
-          dashboardItem: true
+          dashboardItem: true,
+          fillContainer: true
         }
       ), /* @__PURE__ */ _(
         SimpleSubsystem_default,
@@ -4258,15 +4670,17 @@ function pages_default() {
           socket,
           unit: "in",
           precision: 1,
-          dashboardItem: true
+          dashboardItem: true,
+          fillContainer: true
         }
-      ), /* @__PURE__ */ _(
+      )), /* @__PURE__ */ _(DashboardSubRow, null, /* @__PURE__ */ _(
         SimpleSubsystem_default,
         {
           name: "Wrist",
           socket,
           absolute: true,
-          dashboardItem: true
+          dashboardItem: true,
+          fillContainer: true
         }
       ), /* @__PURE__ */ _(
         SimpleSubsystem_default,
@@ -4276,24 +4690,30 @@ function pages_default() {
           velocity: true,
           precision: 1,
           unit: "rpm",
-          dashboardItem: true
+          dashboardItem: true,
+          fillContainer: true
         }
-      ))))
+      )), /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Actuator Testing"), /* @__PURE__ */ _(ActuatorTesting_default, { socket })))), /* @__PURE__ */ _("div", { class: "col-1 column" })))
     },
     {
       title: "Variables",
       content: /* @__PURE__ */ _(Container, null, "very helpful thingy that is on the TODO list")
     }
   ];
-  return /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row", style: "padding-left: 1rem;" }, /* @__PURE__ */ _("div", { class: "col-lg-10 col-md-9 column" }, /* @__PURE__ */ _(TabbedContainer, { tabs })), /* @__PURE__ */ _("div", { class: "col-lg-2 col-md-3 column" }, /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _("label", { style: "margin-right: 0.5rem;" }, "Looptime: "), /* @__PURE__ */ _(
+  return /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row", style: "padding-left: 1rem;" }, /* @__PURE__ */ _("div", { class: "col column" }, /* @__PURE__ */ _(TabbedContainer, { tabs })), /* @__PURE__ */ _("div", { class: "col column", style: "flex: 0 0 10rem;" }, /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _("label", { style: "margin-right: 0.5rem;" }, "Looptime: "), /* @__PURE__ */ _(
     NTReadout_default,
     {
       nt: "Control_Loop_Time",
       precision: 0,
-      chars: 2,
       socket
     }
-  )), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(MasterStates_default, { socket, masterStates: ["STOW", "FEED", "SCOR", "CLMB"] })))));
+  )), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(
+    MasterStates_default,
+    {
+      socket,
+      masterStates: ["STOW", "FEED", "SCOR", "CLMB"]
+    }
+  )))));
 }
 
 // pages/indexLoader.tsx

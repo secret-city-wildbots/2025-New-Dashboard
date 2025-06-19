@@ -3,16 +3,14 @@ import { io } from "npm:socket.io-client";
 import TabbedContainer from "../components/TabbedContainer.tsx";
 import Container from "../components/Container.tsx";
 import DashboardItem from "../components/DashboardItem.tsx";
-import Switch from "../components/Switch.tsx";
-import Button from "../components/Button.tsx";
-import ArmableButton from "../components/ArmableButton.tsx";
-import Readout from "../components/Readout.tsx";
 import NTReadout from "../components/NTReadout.tsx";
-import SimpleSubsystem from "../components/SimpleSubsystem.tsx";
-import SwerveModules from "../components/SwerveModules.tsx";
-import BooleanReadout from "../components/BooleanReadout.tsx";
-import NTBooleanReadout from "../components/NTBooleanReadout.tsx";
-import MasterStates from "../components/MasterStates.tsx";
+import SimpleSubsystem from "../panels/SimpleSubsystem.tsx";
+import SwerveModules from "../panels/SwerveModules.tsx";
+import MasterStates from "../panels/MasterStates.tsx";
+import DashboardSubRow from "../components/DashboardSubRow.tsx";
+import FieldMap from "../panels/FieldMap.tsx";
+import ActuatorTesting from "../panels/ActuatorTesting.tsx";
+import DriverProfiles from "../panels/DriverProfiles.tsx";
 
 export default function () {
     const socket = io();
@@ -36,14 +34,18 @@ export default function () {
         },
         {
             title: "TeleOp",
-            content: <Container>oooh camera feeds. very sleek</Container>,
+            content: (
+                <Container>
+                    <FieldMap socket={socket} />
+                </Container>
+            ),
         },
         {
             title: "Tune",
             content: (
                 <Container>
                     <div class="row bubble">
-                        <div class="col-4 column">
+                        <div class="col-3 column">
                             <DashboardItem>
                                 <div>
                                     <h3>Drivetrain</h3>
@@ -55,42 +57,59 @@ export default function () {
                                 </div>
                             </DashboardItem>
                         </div>
-                        <div class="col-4 column">
+                        <div class="col-3 column">
                             <DashboardItem>
-                                <h3>Profiles</h3>
-                            </DashboardItem>
-                            <DashboardItem>
-                                <h3>Actuator Testing</h3>
+                                <div>
+                                    <h3>Profiles</h3>
+                                    <DriverProfiles socket={socket} />
+                                </div>
                             </DashboardItem>
                         </div>
-                        <div class="col-4 column">
-                            <SimpleSubsystem
-                                name="Pivot"
-                                socket={socket}
-                                absolute
-                                dashboardItem
-                            />
-                            <SimpleSubsystem
-                                name="Extender"
-                                socket={socket}
-                                unit="in"
-                                precision={1}
-                                dashboardItem
-                            />
-                            <SimpleSubsystem
-                                name="Wrist"
-                                socket={socket}
-                                absolute
-                                dashboardItem
-                            />
-                            <SimpleSubsystem
-                                name="Intake"
-                                socket={socket}
-                                velocity
-                                precision={1}
-                                unit="rpm"
-                                dashboardItem
-                            />
+                        <div class="col-5 column">
+                            <DashboardSubRow>
+                                <SimpleSubsystem
+                                    name="Pivot"
+                                    socket={socket}
+                                    absolute
+                                    dashboardItem
+                                    fillContainer
+                                />
+                                <SimpleSubsystem
+                                    name="Extender"
+                                    socket={socket}
+                                    unit="in"
+                                    precision={1}
+                                    dashboardItem
+                                    fillContainer
+                                />
+                            </DashboardSubRow>
+                            <DashboardSubRow>
+                                <SimpleSubsystem
+                                    name="Wrist"
+                                    socket={socket}
+                                    absolute
+                                    dashboardItem
+                                    fillContainer
+                                />
+                                <SimpleSubsystem
+                                    name="Intake"
+                                    socket={socket}
+                                    velocity
+                                    precision={1}
+                                    unit="rpm"
+                                    dashboardItem
+                                    fillContainer
+                                />
+                            </DashboardSubRow>
+                            <DashboardItem>
+                                <div>
+                                    <h3>Actuator Testing</h3>
+                                    <ActuatorTesting socket={socket} />
+                                </div>
+                            </DashboardItem>
+                        </div>
+                        <div class="col-1 column">
+
                         </div>
                     </div>
                 </Container>
@@ -109,21 +128,23 @@ export default function () {
     return (
         <Container>
             <div class="row" style="padding-left: 1rem;">
-                <div class="col-lg-10 col-md-9 column">
+                <div class="col column">
                     <TabbedContainer tabs={tabs} />
                 </div>
-                <div class="col-lg-2 col-md-3 column">
+                <div class="col column" style="flex: 0 0 10rem;">
                     <DashboardItem noBubble>
                         <label style="margin-right: 0.5rem;">Looptime: </label>
                         <NTReadout
                             nt="Control_Loop_Time"
                             precision={0}
-                            chars={2}
                             socket={socket}
                         />
                     </DashboardItem>
                     <DashboardItem noBubble>
-                        <MasterStates socket={socket} masterStates={["STOW","FEED","SCOR","CLMB"]}/>
+                        <MasterStates
+                            socket={socket}
+                            masterStates={["STOW", "FEED", "SCOR", "CLMB"]}
+                        />
                     </DashboardItem>
                 </div>
             </div>
