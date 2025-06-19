@@ -3908,7 +3908,7 @@ var Readout = ({
   color = "#eed",
   temperature = false
 }) => {
-  return /* @__PURE__ */ _("div", null, /* @__PURE__ */ _(
+  return /* @__PURE__ */ _("div", { style: "margin-bottom: 0; padding-bottom: 0;" }, /* @__PURE__ */ _(
     "b",
     {
       style: {
@@ -4194,7 +4194,7 @@ var SwerveModules = ({
     justifyContent: "center",
     flexDirection: "column",
     wrap: "no-wrap"
-  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Angle (deg)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Temp (C)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Vel (ft/s)"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, "Shifter"), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("div", { style: "display: flex; justify-center: center; align-items: center; padding-top: 1rem;" }, /* @__PURE__ */ _("div", { style: "padding-right: 0.4rem;" }, /* @__PURE__ */ _(Button_default, { text: "HOME", onClick: onClickHome, onRelease: onReleaseHome })), /* @__PURE__ */ _(ArmableButton_default, { text: "CALIB", onClick: onClickCalib, onRelease: onReleaseCalib })));
+  } }, /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 1"), /* @__PURE__ */ _("th", null, "Module 0")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Angle (deg)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Temp (C)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Vel (ft/s)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Shifter")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_1_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_0_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("table", { class: "mt-3" }, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null), /* @__PURE__ */ _("th", null, "Module 2"), /* @__PURE__ */ _("th", null, "Module 3")), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Angle (deg)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 0, index: 0, chars: 4, socket, angle: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 0, index: 0, chars: 4, socket, angle: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Temp (C)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 1, precision: 0, chars: 4, socket, temperature: true }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Vel (ft/s)")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, precision: 1, index: 2, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, precision: 1, index: 2, chars: 4, socket }))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Shifter")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_2_Details`, index: 3, chars: 4, socket })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTReadout_default, { nt: `Swerve_3_Details`, index: 3, chars: 4, socket })))), /* @__PURE__ */ _("div", { style: "display: flex; justify-center: center; align-items: center; padding-top: 1rem;" }, /* @__PURE__ */ _("div", { style: "padding-right: 0.4rem;" }, /* @__PURE__ */ _(Button_default, { text: "HOME", onClick: onClickHome, onRelease: onReleaseHome })), /* @__PURE__ */ _(ArmableButton_default, { text: "CALIB", onClick: onClickCalib, onRelease: onReleaseCalib })));
 };
 var SwerveModules_default = SwerveModules;
 
@@ -4365,12 +4365,15 @@ var Input = ({
   defaultVal,
   chars: chars2 = 5,
   small = false,
+  noSendBtn = false,
   number = false,
   color = "#eed",
   precision,
-  arrowIncrement = 0.1
+  arrowIncrement = 0.1,
+  max,
+  min
 }) => {
-  if (!(typeof defaultVal == void 0 || typeof defaultVal == null)) {
+  if (typeof defaultVal == void 0 || typeof defaultVal == null) {
     if (number)
       defaultVal = 0;
     else
@@ -4381,19 +4384,17 @@ var Input = ({
   const [currentVal, setCurrentVal] = d2(defaultVal);
   const inputRef = A2(null);
   y2(() => {
-    const onKeyDown = (e3) => {
-      setShiftPressed(e3.shiftKey);
+    const onKey = (e3) => {
+      if (!noSendBtn) {
+        setShiftPressed(e3.shiftKey);
+      }
       setCtrlPressed(e3.ctrlKey);
     };
-    const onKeyUp = (e3) => {
-      setShiftPressed(e3.shiftKey);
-      setCtrlPressed(e3.ctrlKey);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("keyup", onKeyUp);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("keyup", onKey);
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("keyup", onKeyUp);
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("keyup", onKey);
     };
   }, []);
   const onUpdate = () => {
@@ -4441,7 +4442,7 @@ var Input = ({
     {
       style: {
         position: "relative",
-        // ← make this the containing block
+        // make this the containing block
         display: "grid",
         gridTemplateColumns: shiftPressed ? "1fr auto" : "1fr",
         alignItems: "center",
@@ -4497,7 +4498,7 @@ var Input = ({
       {
         style: {
           position: "absolute",
-          right: "0.5rem",
+          right: `${ctrlPressed ? 0.3 : 0.5}rem`,
           // tweak to sit inside padding
           top: "50%",
           transform: "translateY(-50%)",
@@ -4516,10 +4517,10 @@ var Input = ({
           style: {
             pointerEvents: "auto",
             // re-enable clicks on the arrows
-            padding: "0 0.4rem",
-            fontSize: "0.8rem",
-            lineHeight: 1,
-            borderRadius: "0.25rem"
+            padding: `0 ${ctrlPressed ? 0.4 : 0.3}rem`,
+            fontSize: `${ctrlPressed ? 1 : 0.8}rem`,
+            lineHeight: `${ctrlPressed ? 1 : 0.8}rem`,
+            borderRadius: `${ctrlPressed ? 10 : 6}px`
           }
         }
       ),
@@ -4530,10 +4531,10 @@ var Input = ({
           onClick: decrement,
           style: {
             pointerEvents: "auto",
-            padding: "0 0.4rem",
-            fontSize: "0.8rem",
-            lineHeight: 1,
-            borderRadius: "0.25rem"
+            padding: `0 ${ctrlPressed ? 0.4 : 0.3}rem`,
+            fontSize: `${ctrlPressed ? 1 : 0.8}rem`,
+            lineHeight: `${ctrlPressed ? 1 : 0.8}rem`,
+            borderRadius: `${ctrlPressed ? 10 : 6}px`
           }
         }
       )
@@ -4592,16 +4593,13 @@ var ActuatorTesting = ({
         wrap: "no-wrap"
       }
     },
-    /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Name:")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Value:")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Period:"))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(Dropdown_default, { items: actuatorNames, valSetter: setActuatorVal })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Value", defaultVal: 0, number: true, precision: 2 })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Period", defaultVal: 0, number: true, precision: 1 }))))
+    /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Name:")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Value (dc):")), /* @__PURE__ */ _("th", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Period (s):"))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(Dropdown_default, { items: actuatorNames, valSetter: setActuatorVal })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Value", defaultVal: 0, number: true, precision: 2 })), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(NTInput_default, { socket, nt: "Test_Actuator_Period", defaultVal: 0, number: true, precision: 1 }))))
   );
 };
 var ActuatorTesting_default = ActuatorTesting;
 
 // panels/DriverProfiles.tsx
-var DriverProfiles = ({
-  socket,
-  dashboardItem = false
-}) => {
+var DriverProfiles = ({ socket, dashboardItem = false }) => {
   const [driver, setDriver] = d2("Devin");
   const [driverNames, setDriverNames] = d2(["Devin"]);
   socket.on("Legal_Drivers", (val) => {
@@ -4624,7 +4622,67 @@ var DriverProfiles = ({
       }
     },
     /* @__PURE__ */ _(Dropdown_default, { items: driverNames, valSetter: setDriverVal }),
-    /* @__PURE__ */ _(Input_default, null)
+    /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Strafe Deadband")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 0.08,
+        arrowIncrement: 0.01,
+        precision: 2,
+        chars: 5
+      }
+    ))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Strafe Scaling")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 3,
+        arrowIncrement: 0.1,
+        precision: 2,
+        chars: 5
+      }
+    ))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Strafe Max")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 1,
+        arrowIncrement: 0.01,
+        precision: 2,
+        chars: 5
+      }
+    ))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Rotate Deadband")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 0.15,
+        arrowIncrement: 0.01,
+        precision: 2,
+        chars: 5
+      }
+    ))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Rotate Scaling")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 3.5,
+        arrowIncrement: 0.1,
+        precision: 2,
+        chars: 5
+      }
+    ))), /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Rotate Max")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
+      Input_default,
+      {
+        number: true,
+        noSendBtn: true,
+        defaultVal: 0.6,
+        arrowIncrement: 0.01,
+        precision: 2,
+        chars: 5
+      }
+    ))))
   );
 };
 var DriverProfiles_default = DriverProfiles;
@@ -4647,7 +4705,7 @@ function pages_default() {
     },
     {
       title: "Tune",
-      content: /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row bubble" }, /* @__PURE__ */ _("div", { class: "col-3 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Drivetrain"), /* @__PURE__ */ _(
+      content: /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row bubble" }, /* @__PURE__ */ _("div", { class: "col-4 column" }, /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Drivetrain"), /* @__PURE__ */ _(
         SwerveModules_default,
         {
           socket,
@@ -4693,21 +4751,21 @@ function pages_default() {
           dashboardItem: true,
           fillContainer: true
         }
-      )), /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Actuator Testing"), /* @__PURE__ */ _(ActuatorTesting_default, { socket })))), /* @__PURE__ */ _("div", { class: "col-1 column" })))
+      )), /* @__PURE__ */ _(DashboardItem, null, /* @__PURE__ */ _("div", null, /* @__PURE__ */ _("h3", null, "Actuator Testing"), /* @__PURE__ */ _(ActuatorTesting_default, { socket }))))))
     },
     {
       title: "Variables",
       content: /* @__PURE__ */ _(Container, null, "very helpful thingy that is on the TODO list")
     }
   ];
-  return /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row", style: "padding-left: 1rem;" }, /* @__PURE__ */ _("div", { class: "col column" }, /* @__PURE__ */ _(TabbedContainer, { tabs })), /* @__PURE__ */ _("div", { class: "col column", style: "flex: 0 0 10rem;" }, /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _("label", { style: "margin-right: 0.5rem;" }, "Looptime: "), /* @__PURE__ */ _(
+  return /* @__PURE__ */ _(Container, null, /* @__PURE__ */ _("div", { class: "row", style: "padding-left: 1rem;" }, /* @__PURE__ */ _("div", { class: "col column" }, /* @__PURE__ */ _(TabbedContainer, { tabs })), /* @__PURE__ */ _("div", { class: "col column", style: "flex: 0 0 12rem;" }, /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(FlexRow, null, /* @__PURE__ */ _("label", { class: "label-small", style: "margin-right: 0; padding-right: 0;" }, "Loop (ms): "), /* @__PURE__ */ _(
     NTReadout_default,
     {
       nt: "Control_Loop_Time",
       precision: 0,
       socket
     }
-  )), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(
+  ))), /* @__PURE__ */ _(DashboardItem, { noBubble: true }, /* @__PURE__ */ _(
     MasterStates_default,
     {
       socket,

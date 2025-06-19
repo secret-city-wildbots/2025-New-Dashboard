@@ -19,7 +19,7 @@ const Readout = ({
   temperature = false,
 }: ReadoutProps) => {
   return (
-    <div>
+    <div style="margin-bottom: 0; padding-bottom: 0;">
       <b style={ 
         { ...((angle) ? {
               display: "flex",

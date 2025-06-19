@@ -40,8 +40,8 @@ const ActuatorTesting = ({
             <table>
                 <tr>
                     <th><label class="label-small">Name:</label></th>
-                    <th><label class="label-small">Value:</label></th>
-                    <th><label class="label-small">Period:</label></th>
+                    <th><label class="label-small">Value (dc):</label></th>
+                    <th><label class="label-small">Period (s):</label></th>
                 </tr>
                 <tr>
                     <td>

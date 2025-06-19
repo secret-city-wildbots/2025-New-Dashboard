@@ -11,6 +11,7 @@ import DashboardSubRow from "../components/DashboardSubRow.tsx";
 import FieldMap from "../panels/FieldMap.tsx";
 import ActuatorTesting from "../panels/ActuatorTesting.tsx";
 import DriverProfiles from "../panels/DriverProfiles.tsx";
+import FlexRow from "../components/FlexRow.tsx";
 
 export default function () {
     const socket = io();
@@ -45,7 +46,7 @@ export default function () {
             content: (
                 <Container>
                     <div class="row bubble">
-                        <div class="col-3 column">
+                        <div class="col-4 column">
                             <DashboardItem>
                                 <div>
                                     <h3>Drivetrain</h3>
@@ -108,9 +109,6 @@ export default function () {
                                 </div>
                             </DashboardItem>
                         </div>
-                        <div class="col-1 column">
-
-                        </div>
                     </div>
                 </Container>
             ),
@@ -131,14 +129,16 @@ export default function () {
                 <div class="col column">
                     <TabbedContainer tabs={tabs} />
                 </div>
-                <div class="col column" style="flex: 0 0 10rem;">
+                <div class="col column" style="flex: 0 0 12rem;">
                     <DashboardItem noBubble>
-                        <label style="margin-right: 0.5rem;">Looptime: </label>
-                        <NTReadout
-                            nt="Control_Loop_Time"
-                            precision={0}
-                            socket={socket}
-                        />
+                        <FlexRow>
+                            <label class="label-small" style="margin-right: 0; padding-right: 0;">Loop (ms): </label>
+                            <NTReadout
+                                nt="Control_Loop_Time"
+                                precision={0}
+                                socket={socket}
+                            />
+                        </FlexRow>
                     </DashboardItem>
                     <DashboardItem noBubble>
                         <MasterStates

@@ -58,7 +58,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Angle (deg)
+                    <label class="label-small">
+                        Angle (deg)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_1_Details`} precision={0} index={0} chars={4} socket={socket} angle />
@@ -69,7 +71,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Temp (C) 
+                    <label class="label-small">
+                        Temp (C)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_1_Details`} index={1} precision={0} chars={4} socket={socket} temperature />
@@ -80,7 +84,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Vel (ft/s)
+                    <label class="label-small">
+                        Vel (ft/s)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_1_Details`} precision={1} index={2} chars={4} socket={socket} />
@@ -91,7 +97,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Shifter
+                    <label class="label-small">
+                        Shifter
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_1_Details`} index={3} chars={4} socket={socket} />
@@ -115,7 +123,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Angle (deg)
+                    <label class="label-small">
+                        Angle (deg)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_2_Details`} precision={0} index={0} chars={4} socket={socket} angle />
@@ -126,7 +136,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Temp (C) 
+                    <label class="label-small">
+                        Temp (C)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_2_Details`} index={1} precision={0} chars={4} socket={socket} temperature />
@@ -137,7 +149,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Vel (ft/s)
+                    <label class="label-small">
+                        Vel (ft/s)
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_2_Details`} precision={1} index={2} chars={4} socket={socket} />
@@ -148,7 +162,9 @@ const SwerveModules = ({
             </tr>
             <tr>
                 <td>
-                    Shifter
+                    <label class="label-small">
+                        Shifter
+                    </label>
                 </td>
                 <td>
                     <NTReadout nt={`Swerve_2_Details`} index={3} chars={4} socket={socket} />

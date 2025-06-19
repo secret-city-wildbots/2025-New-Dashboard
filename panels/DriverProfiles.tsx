@@ -11,10 +11,7 @@ interface DriverProfilesProps {
     dashboardItem?: boolean;
 }
 
-const DriverProfiles = ({
-    socket,
-    dashboardItem = false,
-}: DriverProfilesProps) => {
+const DriverProfiles = ({ socket, dashboardItem = false }: DriverProfilesProps) => {
     const [driver, setDriver] = useState("Devin");
     const [driverNames, setDriverNames] = useState(["Devin"]);
 
@@ -39,7 +36,98 @@ const DriverProfiles = ({
             }}
         >
             <Dropdown items={driverNames} valSetter={setDriverVal} />
-            <Input />
+            <table>
+                <tr>
+                    <td>
+                        <label class="label-small">Strafe Deadband</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={0.08}
+                            arrowIncrement={0.01}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-small">Strafe Scaling</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={3.0}
+                            arrowIncrement={0.1}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-small">Strafe Max</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={1.0}
+                            arrowIncrement={0.01}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-small">Rotate Deadband</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={0.15}
+                            arrowIncrement={0.01}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-small">Rotate Scaling</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={3.5}
+                            arrowIncrement={0.1}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-small">Rotate Max</label>
+                    </td>
+                    <td>
+                        <Input
+                            number
+                            noSendBtn
+                            defaultVal={0.6}
+                            arrowIncrement={0.01}
+                            precision={2}
+                            chars={5}
+                        />
+                    </td>
+                </tr>
+            </table>
         </div>
     );
 };

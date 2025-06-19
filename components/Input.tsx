@@ -8,23 +8,29 @@ interface InputProps {
     chars?: number;
     color?: string;
     small?: boolean;
+    noSendBtn?: boolean;
     number?: boolean;
     precision?: number;
     arrowIncrement?: number;
+    max?: number;
+    min?: number;
 }
 
 const Input = ({
-    valSetter = (val: string|number) => {},
+    valSetter = (val: string | number) => {},
     defaultVal,
     chars = 5,
     small = false,
+    noSendBtn = false,
     number = false,
     color = "#eed",
     precision,
     arrowIncrement = 0.1,
+    max,
+    min,
 }: InputProps) => {
     //set defaultVal default according to input type
-    if (!(typeof defaultVal == undefined || typeof defaultVal == null)) {
+    if (typeof defaultVal == undefined || typeof defaultVal == null) {
         if (number) defaultVal = 0;
         else defaultVal = "";
     }
@@ -35,25 +41,23 @@ const Input = ({
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const onKeyDown = (e: KeyboardEvent) => {
-            setShiftPressed(e.shiftKey);
+        const onKey = (e: KeyboardEvent) => {
+            if (!noSendBtn) {
+                setShiftPressed(e.shiftKey);
+            }
             setCtrlPressed(e.ctrlKey);
         };
-        const onKeyUp = (e: KeyboardEvent) => {
-            setShiftPressed(e.shiftKey);
-            setCtrlPressed(e.ctrlKey);
-        };
-        document.addEventListener("keydown", onKeyDown);
-        document.addEventListener("keyup", onKeyUp);
+        document.addEventListener("keydown", onKey);
+        document.addEventListener("keyup", onKey);
         return () => {
-            document.removeEventListener("keydown", onKeyDown);
-            document.removeEventListener("keyup", onKeyUp);
+            document.removeEventListener("keydown", onKey);
+            document.removeEventListener("keyup", onKey);
         };
     }, []);
 
     const onUpdate = () => {
         if (inputRef.current) {
-            let newVal:string|number = inputRef.current.value;
+            let newVal: string | number = inputRef.current.value;
 
             if (number) {
                 newVal = parseFloat(newVal);
@@ -80,10 +84,7 @@ const Input = ({
         if (!inputRef.current) return;
         let v = parseFloat(inputRef.current.value);
         if (isNaN(v)) v = 0;
-        inputRef.current.value = (
-            v +
-            arrowIncrement * (ctrlPressed ? 10 : 1)
-        ).toString();
+        inputRef.current.value = (v + arrowIncrement * (ctrlPressed ? 10 : 1)).toString();
         onUpdate();
     };
 
@@ -91,17 +92,14 @@ const Input = ({
         if (!inputRef.current) return;
         let v = parseFloat(inputRef.current.value);
         if (isNaN(v)) v = 0;
-        inputRef.current.value = (
-            v -
-            arrowIncrement * (ctrlPressed ? 10 : 1)
-        ).toString();
+        inputRef.current.value = (v - arrowIncrement * (ctrlPressed ? 10 : 1)).toString();
         onUpdate();
     };
 
     return (
         <div
             style={{
-                position: "relative", // ← make this the containing block
+                position: "relative", // make this the containing block
                 display: "grid",
                 gridTemplateColumns: shiftPressed ? "1fr auto" : "1fr",
                 alignItems: "center",
@@ -120,7 +118,7 @@ const Input = ({
                     color,
                     width: "100%",
                     minWidth: 0,
-                    paddingRight: (number && !shiftPressed) ? "1.9rem" : "0.5rem",
+                    paddingRight: number && !shiftPressed ? "1.9rem" : "0.5rem",
                     borderTopRightRadius: shiftPressed ? 0 : undefined,
                     borderBottomRightRadius: shiftPressed ? 0 : undefined,
                 }}
@@ -152,11 +150,11 @@ const Input = ({
             )}
 
             {/* Ctrl arrows (absolutely positioned inside the same wrapper) */}
-            {(number && !shiftPressed) && (
+            {number && !shiftPressed && (
                 <div
                     style={{
                         position: "absolute",
-                        right: "0.5rem", // tweak to sit inside padding
+                        right: `${ctrlPressed ? 0.3 : 0.5}rem`, // tweak to sit inside padding
                         top: "50%",
                         transform: "translateY(-50%)",
                         display: "flex",
@@ -170,10 +168,10 @@ const Input = ({
                         onClick={increment}
                         style={{
                             pointerEvents: "auto", // re-enable clicks on the arrows
-                            padding: "0 0.4rem",
-                            fontSize: "0.8rem",
-                            lineHeight: 1,
-                            borderRadius: "0.25rem",
+                            padding: `0 ${ctrlPressed ? 0.4 : 0.3}rem`,
+                            fontSize: `${ctrlPressed ? 1 : 0.8}rem`,
+                            lineHeight: `${ctrlPressed ? 1 : 0.8}rem`,
+                            borderRadius: `${ctrlPressed ? 10 : 6}px`,
                         }}
                     />
                     <Button
@@ -181,10 +179,10 @@ const Input = ({
                         onClick={decrement}
                         style={{
                             pointerEvents: "auto",
-                            padding: "0 0.4rem",
-                            fontSize: "0.8rem",
-                            lineHeight: 1,
-                            borderRadius: "0.25rem",
+                            padding: `0 ${ctrlPressed ? 0.4 : 0.3}rem`,
+                            fontSize: `${ctrlPressed ? 1 : 0.8}rem`,
+                            lineHeight: `${ctrlPressed ? 1 : 0.8}rem`,
+                            borderRadius: `${ctrlPressed ? 10 : 6}px`,
                         }}
                     />
                 </div>
