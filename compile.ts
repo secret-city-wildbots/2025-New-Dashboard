@@ -1,4 +1,6 @@
-export async function listFilesRecursive(
+import chalk from "npm:chalk";
+
+async function listFilesRecursive(
   dir: string,
   base: string = dir,
 ): Promise<string[]> {
@@ -73,6 +75,8 @@ const fileThingyidk = Deno.readTextFileSync("index.ts").replace('app.use(express
 
 Deno.writeTextFileSync("indexTemp.ts", `import * as publicEmbed from "./publicEmbed.ts";\n`+fileThingyidk);
 
+console.info(chalk.cyan("compiling dashboard.exe"));
+
 const command = new Deno.Command(Deno.execPath(), {
     args: [
         "compile",
@@ -87,4 +91,18 @@ const command = new Deno.Command(Deno.execPath(), {
     ]
 });
 
-command.spawn();
+console.info((await command.output()).success ? chalk.green("successfully compiled!"):chalk.red("failed to compile"));
+
+console.info(chalk.cyan("ziping dashboard.exe"));
+
+const zipify = new Deno.Command("tar.exe", {
+    args: [
+        "acvf",
+        "dashboard.zip",
+        "dashboard.exe",
+    ]
+});
+
+await zipify.output()
+
+console.info(chalk.green("finished ziping"));
