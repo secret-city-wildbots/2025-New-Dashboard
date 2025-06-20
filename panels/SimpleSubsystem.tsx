@@ -4,7 +4,7 @@ import NTReadout from "../components/NTReadout.tsx";
 import { Socket } from "npm:socket.io-client";
 import Switch from "../components/Switch.tsx";
 
-interface ReadoutProps {
+interface SimpleSubsystemProps {
     absolute?: boolean;
     unit?: string;
     gearRatio?: number;
@@ -26,7 +26,7 @@ const SimpleSubsystem = ({
     precision = 0,
     socket,
     name,
-}: ReadoutProps) => {
+}: SimpleSubsystemProps) => {
     if (!unit) {
         unit = velocity ? "rpm" : "deg";
     }
@@ -97,7 +97,7 @@ const SimpleSubsystem = ({
                     </div>
                     <div style="min-height: 2.5rem" class="flex-row">
                         <label class="label-small pr-3">Temp (C)</label>
-                        <NTReadout nt={name + "_Temp_(C)"} socket={socket} precision={3} temperature />
+                        <NTReadout nt={name + "_Temp_(C)"} socket={socket} precision={3} temperature chars={3} />
                     </div>
                   </div>
                   <div style="margin-left: 0.25rem;">
@@ -124,7 +124,7 @@ const SimpleSubsystem = ({
                     </div>
                     <div style="min-height: 2.5rem" class="flex-row">
                         <label class="label-small pr-3">Temp (C)</label>
-                        <NTReadout nt={name + "_Temp_(C)"} socket={socket} precision={3} temperature />
+                        <NTReadout nt={name + "_Temp_(C)"} socket={socket} precision={3} chars={3} />
                     </div>
                 </>
             )}
