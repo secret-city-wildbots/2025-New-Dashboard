@@ -3835,7 +3835,19 @@ function D2(n2, t3) {
 
 // components/TabbedContainer.tsx
 function TabbedContainer({ tabs }) {
-  const [activeIndex, setActiveIndex] = d2(0);
+  const getInitialIndex = () => {
+    const param = new URLSearchParams(window.location.search).get("tab");
+    const index = tabs.findIndex(
+      (tab) => tab.title.toLowerCase() === param?.toLowerCase()
+    );
+    return index >= 0 ? index : 0;
+  };
+  const [activeIndex, setActiveIndex] = d2(getInitialIndex);
+  y2(() => {
+    const url2 = new URL(window.location.href);
+    url2.searchParams.set("tab", tabs[activeIndex].title.toLowerCase());
+    window.history.replaceState(null, "", url2.toString());
+  }, [activeIndex]);
   return /* @__PURE__ */ _("div", { class: "container-fluid" }, /* @__PURE__ */ _("div", { class: "tab-bar" }, tabs.map((tab, index) => /* @__PURE__ */ _(
     "button",
     {
@@ -4621,7 +4633,7 @@ var DriverProfiles = ({ socket, dashboardItem = false }) => {
         wrap: "no-wrap"
       }
     },
-    /* @__PURE__ */ _(Dropdown_default, { items: driverNames, valSetter: setDriverVal }),
+    /* @__PURE__ */ _(FlexRow, null, /* @__PURE__ */ _(Dropdown_default, { items: driverNames, valSetter: setDriverVal }), /* @__PURE__ */ _(Button_default, { text: "SAVE" })),
     /* @__PURE__ */ _("table", null, /* @__PURE__ */ _("tr", null, /* @__PURE__ */ _("td", null, /* @__PURE__ */ _("label", { class: "label-small" }, "Strafe Deadband")), /* @__PURE__ */ _("td", null, /* @__PURE__ */ _(
       Input_default,
       {

@@ -5,6 +5,8 @@ import { Socket } from "socket.io-client";
 import Dropdown from "../components/Dropdown.tsx";
 import NTInput from "../components/NTInput.tsx";
 import Input from "../components/Input.tsx";
+import FlexRow from "../components/FlexRow.tsx";
+import Button from "../components/Button.tsx";
 
 interface DriverProfilesProps {
     socket: Socket;
@@ -35,7 +37,10 @@ const DriverProfiles = ({ socket, dashboardItem = false }: DriverProfilesProps) 
                 wrap: "no-wrap",
             }}
         >
-            <Dropdown items={driverNames} valSetter={setDriverVal} />
+            <FlexRow>
+                <Dropdown items={driverNames} valSetter={setDriverVal} />
+                <Button text="SAVE" />
+            </FlexRow>
             <table>
                 <tr>
                     <td>

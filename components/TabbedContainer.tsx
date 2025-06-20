@@ -1,5 +1,5 @@
 import { h } from "npm:preact";
-import { useState } from "npm:preact/hooks";
+import { useState, useEffect } from "npm:preact/hooks";
 import type { ComponentChildren } from "npm:preact";
 
 export type Tab = {
@@ -12,7 +12,21 @@ type TabbedContainerProps = {
 };
 
 export default function TabbedContainer({ tabs }: TabbedContainerProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const getInitialIndex = () => {
+    const param = new URLSearchParams(window.location.search).get("tab");
+    const index = tabs.findIndex(
+      (tab) => tab.title.toLowerCase() === param?.toLowerCase()
+    );
+    return index >= 0 ? index : 0;
+  };
+
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tabs[activeIndex].title.toLowerCase());
+    window.history.replaceState(null, "", url.toString());
+  }, [activeIndex]);
 
   return (
     <div class="container-fluid">
