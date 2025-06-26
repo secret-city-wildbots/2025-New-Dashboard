@@ -1,4 +1,10 @@
-Components:
+key:
+> = done
+* = jasper doing
+$ = wyatt doing
+- = todo
+
+TODO:
     >On/Off switch
     >Button
     >Armable Button
@@ -13,19 +19,19 @@ Components:
     >Dropdown
     >Input (basically just the readout styles)
     >Actuator Testing
-    *Field Map
+    >Checklist
+    *Camera Feed - cant work on without robot
+    *Field Map - cant work on without robot
     *Driver Profiles Editor/Selector
+    $Robot Position Editor
     -Error Modals
-    -Camera Feed
     -Master Alarm
     -Master Alarm Global Display
     -Master Alarms
     -Slider
-    -Robot Position Editor
     -Auto Plays
     -Variables Page
     -Driver/Manip Help
-    -Checklist
 
     -Motor Testing
     -Setpoint Editor

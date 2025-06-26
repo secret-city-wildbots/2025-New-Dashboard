@@ -12,15 +12,10 @@ interface RobotPosReadoutProps {
 
 const RobotPosReadout = ({ socket }: RobotPosReadoutProps) => {
   return (
-      <FlexCol>
-        <div style="padding-bottom: 1rem">
-          <Button text="PUSH ROBOT POS" />
-        </div>
-
         <table>
           <tr>
             <td>
-              <label>Current X (in)</label>
+              <label class="label-small">Current X (in)</label>
             </td>
             <td>
               <NTReadout nt="Robot_X" socket={socket} precision={1} chars={4} />
@@ -28,22 +23,21 @@ const RobotPosReadout = ({ socket }: RobotPosReadoutProps) => {
           </tr>
           <tr>
             <td>
-              <label>Y (in)</label>
+              <label class="label-small">Current Y (in)</label>
             </td>
             <td>
-              <Input defaultVal={0.0} number precision={1} />
+              <NTReadout nt="Robot_Y" socket={socket} precision={1} chars={4} />
             </td>
           </tr>
           <tr>
             <td>
-              <label>H (deg)</label>
+              <label class="label-small">Current H (deg)</label>
             </td>
             <td>
-              <Input defaultVal={0.0} number precision={1} noSendBtn />
+              <NTReadout nt="Robot_H" socket={socket} precision={1} chars={4} />
             </td>
           </tr>
         </table>
-      </FlexCol>
   );
 };
 
