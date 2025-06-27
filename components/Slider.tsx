@@ -37,6 +37,6 @@ const Slider = ({ min, max, valSetter = () => {}, defaultVal }: SliderProps) => 
 
 export default Slider;
 
->   defaultVal setup
+/* >   defaultVal setup
 >   Val Setter
->   useEffects
+>   useEffects */
